@@ -1,25 +1,20 @@
-
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "../components/FormSchema/registerschema";
 import { useNavigate, Link } from "react-router-dom";
 
 function StudentRegister() {
-  const [name, setName] = useState("");
-  const [registerNumber, setRegisterNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [hostelBlock, setHostelBlock] = useState("");
-  const [roomNumber, setRoomNumber] = useState("");
+  const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(registerSchema)
+});
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    alert("Registration Successful!");
-
-    navigate("/student-login");
-  }
+ function handleRegister(data) {
+  console.log(data);
+  alert("Registration Successful!");
+  navigate("/student-login");
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -34,46 +29,51 @@ function StudentRegister() {
           Student Registration
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
 
           <div>
             <label className="block mb-2">Student Name</label>
-            <input type="text" required placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="text" placeholder="Enter your name" {...register("name")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.name?.message}</p>
           </div>
 
           <div>
             <label className="block mb-2">Register Number</label>
-            <input type="text" required placeholder="Enter register number" value={registerNumber} onChange={(e) => setRegisterNumber(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="text" placeholder="Enter your Register Number" {...register("registerNumber")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.registerNumber?.message}</p>
           </div>
 
           <div>
             <label className="block mb-2">College Email ID</label>
-            <input type="email" required placeholder="Enter college email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="email" placeholder="Enter your College Email ID" {...register("email")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.email?.message}</p>          
           </div>
 
           <div>
             <label className="block mb-2">Password</label>
-            <input type="password" required placeholder="Create password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="password" placeholder="Enter your Password" {...register("password")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.password?.message}</p>          
           </div>
 
           <div>
             <label className="block mb-2">Phone Number</label>
-            <input type="tel" required placeholder="Enter phone number" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="tel" placeholder="Enter your Phone Number" {...register("phone")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.phone?.message}</p>          
           </div>
 
           <div>
             <label className="block mb-2">Hostel Block</label>
-            <input type="text" required placeholder="Enter hostel block" value={hostelBlock} onChange={(e) => setHostelBlock(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="text" placeholder="Enter your HostelBlock" {...register("hostelBlock")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.hostelBlock?.message}</p>          
           </div>
 
           <div>
             <label className="block mb-2">Room Number</label>
-            <input type="text" required placeholder="Enter room number" value={roomNumber} onChange={(e) => setRoomNumber(e.target.value)} className="w-full border p-3 rounded-lg" />
+            <input type="text" placeholder="Enter your Room Number" {...register("roomNumber")} className="w-full border p-3 rounded-lg" />
+            <p className="text-red-500 text-sm">{errors.roomNumber?.message}</p>          
           </div>
 
-          <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700">
-            Register
-          </button>
+          <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700">Register</button>
 
         </form>
 
