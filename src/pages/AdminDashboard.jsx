@@ -1,5 +1,7 @@
-function () {
-    return (  );
+function AdminDashboard() {
+    return ( 
+        <div></div>
+     );
 }
 
-export default ;
+export default AdminDashboard ;

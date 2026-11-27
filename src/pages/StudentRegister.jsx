@@ -21,13 +21,9 @@ function StudentRegister() {
 
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
 
-        <h1 className="text-2xl font-bold text-center mb-2">
-          Hostel Complaint System
-        </h1>
+        <h1 className="text-2xl font-bold text-center mb-2"> Hostel Complaint System </h1>
 
-        <p className="text-gray-500 text-center mb-6">
-          Student Registration
-        </p>
+        <p className="text-gray-500 text-center mb-6"> Student Registration </p>
 
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
 
